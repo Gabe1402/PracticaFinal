@@ -5,8 +5,8 @@
 package es.medac.practicafinalcoches.document;
 
 /**
- *
- * @author Usuario
+ *  Clase que refleja la tabla Clientes de la BD
+ * @author Pablo
  */
 public class Cliente {
     private String dni;

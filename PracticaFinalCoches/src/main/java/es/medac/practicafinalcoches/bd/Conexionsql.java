@@ -8,15 +8,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
- * @author medac
+ * Esta clase crea la conexion a la base de datos
+ * @author Gabriel
  */
 public class Conexionsql {
-        protected Connection conexionSQL;
+    //campos de la clase
+    protected Connection conexionSQL;
     private final String URL = "jdbc:mysql://localhost/tallercoches";
     private final String USUARIO = "medac";
     private final String PASSWORD = "1234contra";
     
+    /**
+    * Constructor de la clase que se conecta a la base de datos
+    */
     public Conexionsql() {
         //conexionSQL = null;
         try {
@@ -26,12 +30,19 @@ public class Conexionsql {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }//fin del constructor
     
+    /**
+    * Regresa la variable conexionSQL, que se encuentra conectada con la BD
+    * @return Regresa la variable conexionSQL
+    */
     public Connection getConexion(){
         return conexionSQL;
-    }
+    }//fin del metodo
     
+    /**
+    * Comprueba si la variable esta cerrada, o no inicializada, y la cierra, en caso de que ambas sean falsas
+    */
     public void cerrar(){
         try {
             if (conexionSQL != null && !conexionSQL.isClosed()){
@@ -41,5 +52,5 @@ public class Conexionsql {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-}
+    }//fin del metodo
+}//fin de la clase

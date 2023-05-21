@@ -5,8 +5,8 @@
 package es.medac.practicafinalcoches.document;
 
 /**
- *
- * @author Usuario
+ * Clase que refleja la tabla Reparaciones de la BD
+ * @author AngelAdrian
  */
 public class reparacion {
     int idCliente;

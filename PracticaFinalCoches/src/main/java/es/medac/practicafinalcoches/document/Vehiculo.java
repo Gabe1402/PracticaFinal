@@ -5,7 +5,7 @@
 package es.medac.practicafinalcoches.document;
 
 /**
- *
+ * Clase que refleja la tabla Vehiculo de la BD
  * @author bapsy
  */
 public class Vehiculo {
