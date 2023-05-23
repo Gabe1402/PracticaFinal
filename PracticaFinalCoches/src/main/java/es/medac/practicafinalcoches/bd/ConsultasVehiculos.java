@@ -25,17 +25,17 @@ public class ConsultasVehiculos {
      public String InsertarVehiculos(int IdVehiculo,String Matricula,String Marca, String Modelo, String Anio, String Color){
        String filasAfectadas = "";
         Conexionsql conexion = new  Conexionsql(); // Creo la conexion a la BD IdMascota, AliasMascotas, Especie, Raza, ColorPelo, FechaNacimiento,Vacunaciones
-        String consulta = "INSERT INTO vehiculo  VALUES ('"+ Matricula+"','"+Marca+"','"+Modelo+"','"+Anio+"','"+Color+"+"+IdVehiculo+"');";
+        String consulta = "INSERT INTO vehiculo  VALUES ('"+ Matricula+"','"+Marca+"','"+Modelo+"','"+Anio+"','"+Color+"','"+IdVehiculo+"');";
         
         System.out.println(consulta);
-        try {
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);){
            int rs = ps.executeUpdate(consulta);
            filasAfectadas = rs + " Registro modificado.";
-                      ps.close();
-            conexion.cerrar();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Error consulta insertar mascotoas " + e.getMessage());
+        } finally {
+            conexion.cerrar();
         }
         return filasAfectadas;
     }//fin del metodo
@@ -49,18 +49,18 @@ public class ConsultasVehiculos {
         String filasModificadas = "";
          Conexionsql conexion = new  Conexionsql(); // Creo la conexion a la BD
         String consulta = "SELECT * FROM `vehiculo` WHERE Matricula= '"+Matricula+ "'";
-        try {
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery(consulta);){
             while (rs.next()) {
                 filasModificadas += rs.getString("Matricula")+"\t"+rs.getString("Marca")+"\t"+rs.getString("Modelo")+"\t"+
                         rs.getString("Anio")+"\t"+rs.getString("Color")+"\t"+rs.getString("idVehiculo")+"\n";
             }
             rs.close();
             ps.close();
-            conexion.cerrar();
         } catch (SQLException e) {
             System.out.println("Error consulta Matricula." + e.getMessage());
+        } finally {
+            conexion.cerrar();
         }
         return filasModificadas;
         }//fin del metodo
@@ -75,18 +75,18 @@ public class ConsultasVehiculos {
         String filasModificadas = " ";
         Conexionsql conexion = new  Conexionsql(); // Creo la conexion a la BD
         String consulta = "SELECT * FROM `vehiculo` WHERE Marca= '"+Marca+"'"+" and modelo = '"+Modelo+"'";
-        try {
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery(consulta);){
             while (rs.next()) {
                 filasModificadas += rs.getString("Matricula")+"\t"+rs.getString("Marca")+"\t"+rs.getString("Modelo")+"\t"+
                         rs.getString("Anio")+"\t"+rs.getString("Color")+"\t"+rs.getString("idVehiculo")+"\n";
             }
             rs.close();
             ps.close();
-            conexion.cerrar();
         } catch (SQLException e) {
             System.out.println("Error consulta Marca y modelo." + e.getMessage());
+        } finally {
+            conexion.cerrar();
         }
         return filasModificadas;
         
@@ -103,18 +103,18 @@ public class ConsultasVehiculos {
         String filasModificadas = " ";
          Conexionsql conexion = new  Conexionsql(); // Creo la conexion a la BD
         String consulta = "SELECT * FROM `vehiculo` WHERE Marca= '"+Marca+"'"+" and modelo = '"+Modelo+"'"+"and anio = '"+anio+"'";
-        try {
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery(consulta);){
             while (rs.next()) {
                 filasModificadas += rs.getString("Matricula")+"\t"+rs.getString("Marca")+"\t"+rs.getString("Modelo")+"\t"+
                         rs.getString("Anio")+"\t"+rs.getString("Color")+"\t"+rs.getString("idVehiculo")+"\n";
             }
             rs.close();
             ps.close();
-            conexion.cerrar();
         } catch (SQLException e) {
             System.out.println("Error consulta Marca y modelo." + e.getMessage());
+        } finally {
+            conexion.cerrar();
         }
         return filasModificadas;
         
@@ -132,14 +132,14 @@ public class ConsultasVehiculos {
          Conexionsql conexion = new  Conexionsql(); // Creo la conexion a la BD
         String consulta = "UPDATE vehiculo SET '"+campoCambio+"' = '"+valorMod+"' WHERE '"+condicion+"'";
        
-        try {
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);){
             int rs = ps.executeUpdate(consulta);
             filasModificadas = rs + " Registro modificado.";
             ps.close();
-            conexion.cerrar();
         } catch (SQLException e) {
             System.out.println("Error consulta modificar vehiculo ." + e.getMessage());
+        } finally {
+            conexion.cerrar();
         }
         return filasModificadas;
         
@@ -155,14 +155,14 @@ public class ConsultasVehiculos {
         Conexionsql conexion = new Conexionsql(); // Creo la conexion a la BD
         String consulta = "DELETE FROM vehiculo WHERE idVehiculo = '"+IdVehiculo+"'";
         
-        try {
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);){
             int rs = ps.executeUpdate(consulta);
             filasEliminadas = rs + " Registro modificado.";
             ps.close();
-            conexion.cerrar();
         } catch (SQLException e) {
             System.out.println("Error consulta borrar vehiculo " + e.getMessage());
+        } finally {
+            conexion.cerrar();
         }
         return filasEliminadas;
     }//fin del metodo

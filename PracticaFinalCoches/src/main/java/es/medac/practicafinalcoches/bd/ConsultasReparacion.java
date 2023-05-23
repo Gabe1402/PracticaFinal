@@ -24,13 +24,14 @@ public class ConsultasReparacion {
         Conexionsql conexion = new Conexionsql();
         String consulta ="INSERT INTO reparacion(idCliente, idVehiculo, Descripcion, Fecha, Tiempo, totalReparacion) VALUES ('"+idCliente+"',"+"'"+idVehiculo+"',"+"'"+Descripcion+"',"+"'"+Fecha+"',"+"'"+Tiempo+"',"+"'"+totalReparacion+"' )";
         String mensaje;
-        try{
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);){
             int rs = ps.executeUpdate();
             mensaje="Se ha insertado correctamente";
             ps.close();
         }catch(SQLException e){
             mensaje="Mal: "+e.getMessage();
+        } finally {
+            conexion.cerrar();
         }
         
         return mensaje;
@@ -47,13 +48,14 @@ public class ConsultasReparacion {
         Conexionsql conexion = new Conexionsql();
         String consulta ="UPDATE reparacion set '"+campoCambio+"' = +'"+valorMod+"' where '"+condicion+"'";
         String mensaje;
-        try{
-            PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);
+        try (PreparedStatement ps = conexion.getConexion().prepareStatement(consulta);){
             int rs = ps.executeUpdate();
             mensaje="Se ha modificado correctamente";
             ps.close();
         }catch(SQLException e){
             mensaje="Mal: "+e;
+        } finally {
+            conexion.cerrar();
         }
         return mensaje;
     }
@@ -67,9 +69,8 @@ public class ConsultasReparacion {
         Conexionsql conexion = new Conexionsql();
         String consulta = "SELECT * FROM reparacion where idCliente='"+idCliente+"'";
         String a="";
-        try{
-            PreparedStatement ps= conexion.getConexion().prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps= conexion.getConexion().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();){
             System.out.println("------TABLA Reparacion-------");
             while(rs.next()){
                 a +=rs.getInt("idCliente")+"\t"+rs.getInt("idVehiculo")+"\t"+rs.getString("Descripcion")+"\t"+rs.getString("Fecha")+"\t"
@@ -80,6 +81,8 @@ public class ConsultasReparacion {
             rs.close();
         }catch(SQLException e){
             a +="Error"+e;
+        } finally {
+            conexion.cerrar();
         }
         return a;
     }//fin del metodo
@@ -93,9 +96,8 @@ public class ConsultasReparacion {
         Conexionsql conexion = new Conexionsql();
         String consulta = "SELECT * FROM reparacion where idVehiculo='"+idVehiculo+"'";
         String a="";
-        try{
-            PreparedStatement ps= conexion.getConexion().prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps= conexion.getConexion().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();){
             System.out.println("------TABLA Reparacion-------");
             while(rs.next()){
                 a +=rs.getInt("idCliente")+"\t"+rs.getInt("idVehiculo")+"\t"+rs.getString("Descripcion")+"\t"+rs.getString("Fecha")+"\t"
@@ -106,7 +108,9 @@ public class ConsultasReparacion {
             rs.close();
         }catch(SQLException e){
             a +="Error"+e;
-    }
+        } finally {
+            conexion.cerrar();
+        }
         return a;
     }//fin del metodo
     
@@ -119,9 +123,8 @@ public class ConsultasReparacion {
         Conexionsql conexion = new Conexionsql();
         String consulta = "SELECT * FROM reparacion where Fecha='"+Fecha+"'";
         String a="";
-        try{
-            PreparedStatement ps= conexion.getConexion().prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps= conexion.getConexion().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();){
             System.out.println("------TABLA Reparacion-------");
             while(rs.next()){
                 a +=rs.getInt("idCliente")+"\t"+rs.getInt("idVehiculo")+"\t"+rs.getString("Descripcion")+"\t"+rs.getString("Fecha")+"\t"
@@ -132,7 +135,9 @@ public class ConsultasReparacion {
             rs.close();
         }catch(SQLException e){
             a +="Error"+e;
-    }
+        } finally {
+            conexion.cerrar();
+        }
         return a;
     }//fin del metodo
     

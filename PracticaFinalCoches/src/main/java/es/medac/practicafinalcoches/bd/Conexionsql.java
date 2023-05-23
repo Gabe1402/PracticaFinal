@@ -28,7 +28,7 @@ public class Conexionsql {
             conexionSQL = DriverManager.getConnection(URL, USUARIO, PASSWORD);
             System.out.println("Conectado");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }//fin del constructor
     
@@ -50,7 +50,7 @@ public class Conexionsql {
                 System.out.println("Se ha cerrado la conexion");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }//fin del metodo
 }//fin de la clase

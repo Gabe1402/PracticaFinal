@@ -19,12 +19,12 @@ public class Vehiculo {
     
     public Vehiculo(){
         super();
-        this.IdVehiculo=IdVehiculo;
-        this.Matricula=Matricula;
-        this.Marca= Marca;   
-        this.Modelo=Modelo;
-        this.Anio=Anio;
-        this.Color=Color;     
+        this.IdVehiculo=0;
+        this.Matricula="";
+        this.Marca= "";   
+        this.Modelo="";
+        this.Anio="";
+        this.Color="";     
     }
     
     public Vehiculo(int IdVehiculo,String Matricula,String Marca, String Modelo, String Anio, String Color){
