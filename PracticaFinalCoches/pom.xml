@@ -10,6 +10,8 @@
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
         <exec.mainClass>es.medac.practica.tema15.practicafinalcoches.PracticaFinalCoches</exec.mainClass>
+        <sonar.organization>gabe1402-implementacion</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
